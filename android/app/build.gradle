@@ -1,24 +1,49 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-
-android {
-    compileSdkVersion 33
-
-    defaultConfig {
-        applicationId "com.example.gamification"
-        minSdkVersion 21
-        targetSdkVersion 33
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-        multiDexEnabled true
-
-        manifestPlaceholders = [
-            'appAuthRedirectScheme': 'com.example.gamification' // Replace with your actual scheme
-        ]
-    }
-    // ...
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
 }
 
-dependencies {
-    implementation 'androidx.multidex:multidex:2.0.1'
+android {
+    namespace = "com.example.gamification"
+    compileSdk = flutter.compileSdkVersion
+
+    defaultConfig {
+        applicationId = "com.example.gamification"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+
+        // Define el valor para los placeholders
+        manifestPlaceholders = [
+            appAuthRedirectScheme: "com.example.gamification",
+            applicationName: "io.flutter.app.FlutterApplication" // Valor predeterminado para Flutter apps
+        ]
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
+
+flutter {
+    source = "../.."
 }

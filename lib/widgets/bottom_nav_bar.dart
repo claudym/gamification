@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
 
-  BottomNavBar({this.currentIndex = 0});
+  const BottomNavBar({super.key, this.currentIndex = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,14 @@ class BottomNavBar extends StatelessWidget {
             break;
         }
       },
-      items: [
+      backgroundColor: Colors.blueGrey[900],
+      selectedItemColor: Colors.cyan,
+      unselectedItemColor: Colors.white70,
+      selectedFontSize: 14,
+      unselectedFontSize: 12,
+      type: BottomNavigationBarType.fixed,
+      elevation: 10,
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Dashboard',

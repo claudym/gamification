@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:gamification/models/reward.dart';
-import 'package:gamification/providers/user_provider.dart';
-import 'package:gamification/services/redeem_reward_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RewardDetailScreen extends StatelessWidget {
   const RewardDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Extract the Reward object from the arguments
-    final reward = ModalRoute.of(context)?.settings.arguments as Reward?;
-    if (reward == null) {
-      // Handle the null case by showing an error message
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)?.error ?? 'Error'),
-        ),
-        body: Center(
-          child: Text(AppLocalizations.of(context)?.noRewardData ??
-              'No reward data found.'),
-        ),
-      );
-    }
-
-    final userProvider = Provider.of<UserProvider>(context);
+    final reward = ModalRoute.of(context)?.settings.arguments as Reward? ??
+        Reward(
+          id: 'dummy_id',
+          title: 'Fallback Dummy Reward',
+          description: 'Fallback dummy reward for testing.',
+          pointCost: 999,
+          imageUrl: 'https://via.placeholder.com/250',
+          terms: 'Fallback reward terms and conditions.',
+        );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            AppLocalizations.of(context)?.rewardDetails ?? 'Reward Details'),
+        title: Text('Reward Details'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -42,53 +30,31 @@ class RewardDetailScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             ListTile(
-              title: Text(reward.description),
-              subtitle: Text(
-                '${reward.pointCost} ${AppLocalizations.of(context)?.points ?? 'points'}',
+              title: Text(reward.title),
+              subtitle: Text('${reward.pointCost} points'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                reward.description,
+                style: const TextStyle(fontSize: 16),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                AppLocalizations.of(context)?.rewardTerms ??
-                    'Reward terms and conditions.',
-                style: const TextStyle(fontSize: 16),
+                reward.terms,
+                style:
+                    const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
               ),
             ),
             ElevatedButton(
-              onPressed: (userProvider.userData?.points ?? 0) >=
-                      reward.pointCost
-                  ? () async {
-                      final success = await RedeemRewardService().redeemReward(
-                        reward.id,
-                        userProvider.userId,
-                      );
-                      if (success) {
-                        // Update user data
-                        await userProvider.fetchUserData(userProvider.userId);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              AppLocalizations.of(context)?.rewardRedeemed ??
-                                  'Reward redeemed successfully.',
-                            ),
-                          ),
-                        );
-                        Navigator.pop(context);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              AppLocalizations.of(context)?.redeemFailed ??
-                                  'Failed to redeem reward.',
-                            ),
-                          ),
-                        );
-                      }
-                    }
-                  : null,
-              child: Text(AppLocalizations.of(context)?.redeemReward ??
-                  'Redeem Reward'),
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Redeem action simulated!')),
+                );
+              },
+              child: const Text('Redeem Reward'),
             ),
           ],
         ),

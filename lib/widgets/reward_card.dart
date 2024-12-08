@@ -22,7 +22,7 @@ class RewardCard extends StatelessWidget {
           children: [
             Expanded(
               child: FadeInImage.assetNetwork(
-                placeholder: 'assets/images/placeholder.png',
+                placeholder: 'assets/images/lion-logo.png',
                 image: reward.imageUrl,
                 fit: BoxFit.cover,
                 width: double.infinity,

@@ -20,23 +20,31 @@ class LoginScreen extends StatelessWidget {
             children: [
               SizedBox(
                 height: 100,
-                child: Image.asset('assets/images/company_logo.png'),
+                width: 100,
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/images/lion-logo.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () async {
-                  await authProvider.signInWithAzureAD();
-                  if (authProvider.isAuthenticated) {
-                    Navigator.pushReplacementNamed(context, '/dashboard');
-                  } else {
-                    // Handle authentication failure
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content:
-                            Text(AppLocalizations.of(context)!.signInFailed),
-                      ),
-                    );
-                  }
+                  // await authProvider.signInWithAzureAD();
+                  Navigator.pushReplacementNamed(context, '/dashboard');
+                  // TODO: Implement sign in with Azure
+                  // if (authProvider.isAuthenticated) {
+                  //   Navigator.pushReplacementNamed(context, '/dashboard');
+                  // } else {
+                  //   // Handle authentication failure
+                  //   ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(
+                  //       content:
+                  //           Text(AppLocalizations.of(context)!.signInFailed),
+                  //     ),
+                  //   );
+                  // }
                 },
                 child: Text(AppLocalizations.of(context)!.signIn),
               ),

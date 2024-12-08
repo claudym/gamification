@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamification/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:gamification/providers/settings_provider.dart'; // Ensure the correct import path
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,6 +41,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 3),
     );
   }
 }
