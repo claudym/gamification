@@ -1,0 +1,45 @@
+name: gamification
+description: "A Flutter application for employee engagement and rewards."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+  provider: ^6.0.5
+  flutter_appauth: ^5.0.0
+  firebase_core: ^2.15.1
+  cloud_firestore: ^4.10.0
+  firebase_auth: ^4.8.1
+  firebase_messaging: ^14.6.4
+  flutter_jailbreak_detection: ^1.10.0
+  device_info_plus: ^9.0.2
+  flutter_local_notifications: ^14.0.0
+  flutter_localizations:
+    sdk: flutter
+  intl: 0.19.0
+  http: ^0.13.5
+  shared_preferences: ^2.1.1
+  cloud_functions: ^4.7.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700

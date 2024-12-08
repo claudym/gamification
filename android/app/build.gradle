@@ -1,0 +1,24 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.example.gamification"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+
+        manifestPlaceholders = [
+            'appAuthRedirectScheme': 'com.example.gamification' // Replace with your actual scheme
+        ]
+    }
+    // ...
+}
+
+dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1'
+}
